@@ -9,8 +9,6 @@ export default createStore({
     token: '',
     isLoading: false,
   },
-  getters: {
-  },
   mutations: {
     initializeStore() {
       if (localStorage.getItem('cart')) {
