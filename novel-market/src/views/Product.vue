@@ -17,7 +17,7 @@
                 <p><strong>Price:</strong>${{ product.price }}</p>
                 <div class="field has-addons mt-6">
                     <div class="control">
-                        <input type="number" class="input" mine="1" v-model="quantity">
+                        <input type="number" class="input" min="1" v-model="quantity">
                     </div>
 
                     <div class="control">
@@ -46,11 +46,13 @@ export default {
 
     },
     methods: {
-        getProduct() {
+        async getProduct() {
+            this.$store.commit('setIsLoading', true)
+
             const category_slug = this.$route.params.category_slug
             const product_slug = this.$route.params.product_slug
 
-            axios
+            await axios
                 .get(`/api/v1/products/${category_slug}/${product_slug}`)
                 .then(response => {
                     this.product = response.data
@@ -58,6 +60,7 @@ export default {
                 .catch(error => {
                     console.log(error)
                 })
+            this.$store.commit('setIsLoading', false)
 
         },
         addToCart() {
