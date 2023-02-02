@@ -55,6 +55,8 @@ export default {
   },
   mounted() {
     this.getLatestProducts()
+
+    document.title = "Home" + "| Novels"
   },
   methods: {
     getLatestProducts() {
